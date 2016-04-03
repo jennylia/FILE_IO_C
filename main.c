@@ -4,6 +4,8 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+#include <math.h>
 /*
  * Play 
  * 1. Create a dir if a file doesn't exist
@@ -11,7 +13,7 @@
  * 3. make the name of a file encrupted*/
 
 #define DIR_NAME "FOLDER"
-#define FILE_NAME "file.txt"
+#define FILE_NAME "file"
 int main(){
   DIR * dp;
   int status;
@@ -25,14 +27,21 @@ int main(){
         printf("yay\n");
       } 
   }
+// part 3
+  srand(time(NULL));
+  int r = (int) rand();
+  char id[4];
+  sprintf(id, "%d", 5);
 
   //part 2
-  int len = strlen(DIR_NAME) + strlen(FILE_NAME) + 1;
+  int len = strlen(DIR_NAME) + strlen(FILE_NAME) + 1 + 4;
   char path[len];
   bzero(path, len);
   strcat(path, DIR_NAME);
   strcat(path, "/");
   strcat(path, FILE_NAME);
+  strcat(path, id);
+
   printf("%s\n", path);
 
   FILE *fp;
@@ -44,4 +53,5 @@ int main(){
     int stat = fputs("sup sup", fp); 
     printf("whats the bytes written%d\n", stat); 
   }
+
 }
